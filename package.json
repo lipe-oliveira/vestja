@@ -17,5 +17,7 @@
 	"scripts": {
 		"dev": "nodemon ./src/index.js",
 		"start": "node ./src/index.js"
-	}
+	},
+	"repository": "https://github.com/lipe-oliveira/bibiboom/",
+	"author": "lipe-oliveira <felipeoliveira.b@gmail.com>"
 }
