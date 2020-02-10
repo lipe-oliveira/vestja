@@ -1,0 +1,6 @@
+BIBLIOTECAS: 
+*yarn add mongoose
+*yarn add express
+*yarn add body-parser
+*yarn add bcryptjs
+*yarn add jsonwebtoken
