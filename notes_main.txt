@@ -4,3 +4,6 @@ BIBLIOTECAS:
 *yarn add body-parser
 *yarn add bcryptjs
 *yarn add jsonwebtoken
+
+DEPLOY ON HEROKU:
+https://scotch.io/tutorials/how-to-deploy-a-node-js-app-to-heroku
