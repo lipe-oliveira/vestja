@@ -6,7 +6,6 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-
 	email: {
 		type: String,
 		unique: true,
@@ -17,6 +16,10 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true,
 		select: false
+	},
+	type: {
+		type: String,
+		required: true
 	},
 	createdAt: {
 		type: Date,
