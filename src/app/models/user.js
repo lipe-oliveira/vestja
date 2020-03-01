@@ -17,9 +17,6 @@ const schema = new mongoose.Schema({
 		required: true,
 		select: false
 	},
-<<<<<<< HEAD
-
-=======
 	seguindo: [
 		{
 			user: {
@@ -58,7 +55,6 @@ const schema = new mongoose.Schema({
 			}
 		}
 	],
->>>>>>> 2de35dda14a30d0907838260dd667d5258565845
 	createdAt: {
 		type: Date,
 		default: Date.now
