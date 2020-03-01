@@ -12,8 +12,6 @@ const schema_project = new mongoose.Schema({
 		required: true
 	},
 
-<<<<<<< HEAD
-=======
 	rates: [
 		{
 			rate: {
@@ -27,7 +25,6 @@ const schema_project = new mongoose.Schema({
 		}
 	],
 
->>>>>>> 2de35dda14a30d0907838260dd667d5258565845
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
