@@ -17,7 +17,48 @@ const schema = new mongoose.Schema({
 		required: true,
 		select: false
 	},
+<<<<<<< HEAD
 
+=======
+	seguindo: [
+		{
+			user: {
+				type: String,
+				required: false
+			}
+		}
+	],
+	salvos: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'user_feeds'
+		}
+	],
+	receitas: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'receitas'
+		}
+	],
+	feed: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'feed'
+		}
+	],
+	restaurantes: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'restaurantes'
+		},
+		{
+			rate: {
+				type: String,
+				required: false
+			}
+		}
+	],
+>>>>>>> 2de35dda14a30d0907838260dd667d5258565845
 	createdAt: {
 		type: Date,
 		default: Date.now
