@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const feed = require('../models/user_feeds');
 const auth = require('../../config/auth.json');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
@@ -25,7 +26,8 @@ router.post('/register', async (req, res) => {
 		const user = await User.create(req.body);
 		user.password = undefined;
 
-		return res.send({ user, token: generateToken({ id: user.id }) });
+		return res.send({ user });
+		//return res.send({ user, token: generateToken({ id: user.id }) });
 	} catch (err) {
 		return res.status(400).send({ error: 'Falha de registro!' });
 	}
@@ -48,11 +50,35 @@ router.post('/authenticate', async (req, res) => {
 
 		user.password = undefined;
 
-		return res.send({ user, token: generateToken({ id: user.id }) });
+		return res.send({ user });
+		//return res.send({ user, token: generateToken({ id: user.id }) });
 	} catch (err) {
 		console.log('erro: ' + err);
 		return res.status(400).send({ error: `Falha de autenticação!` });
 	}
 });
 
-module.exports = (app) => app.use('/auth', router);
+router.post('/feed', async (req, res) => {
+	try {
+		console.log('/feed');
+
+		await feed.create(req.body);
+		const feeder = await feed.find().populate(['user']);
+
+		return res.send({ feeder });
+		//return res.send({ user, token: generateToken({ id: user.id }) });
+	} catch (err) {
+		console.log('erro: ' + err);
+		return res.status(400).send({ error: `Falha de autenticação!` });
+	}
+});
+
+router.get('/', async (req, res) => {
+	try {
+		console.log('/');
+		const user = await User.find();
+		return res.send({ user });
+	} catch (err) {}
+});
+
+module.exports = (app) => app.use('/users', router);

@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const Project = require('../models/project');
-const Tasks = require('../models/tasks');
+const Tasks = require('../models/user_feeds');
 const authMiddleware = require('../middlewares/auth');
 
 console.log('/projectController.js');
 
-router.use(authMiddleware);
+//router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
 	try {
