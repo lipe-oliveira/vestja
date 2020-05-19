@@ -15,7 +15,7 @@ function generateToken(params = {}) {
 	return token;
 }
 
-router.put('/sendfeed/:email', async (req, res) => {
+router.put('/send_feed/:id', async (req, res) => {
 	try {
 		const user = await User.findByIdAndUpdate(req.params.email, req.body, { new: true });
 
@@ -23,6 +23,17 @@ router.put('/sendfeed/:email', async (req, res) => {
 	} catch (err) {
 		console.log(`erro: ${err}`);
 		return res.status(400).send({ erro: 'Cannot create new project!' });
+	}
+});
+
+router.get('/get_id', async (req, res) => {
+	try {
+		const { email } = req.body;
+		const { id } = await User.findOne({ email });
+		res.send({ id });
+	} catch (err) {
+		console.log(err);
+		res.status(400).send({ error: 'Email not found!' });
 	}
 });
 
