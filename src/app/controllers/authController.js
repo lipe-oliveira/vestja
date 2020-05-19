@@ -21,6 +21,7 @@ router.post('/send', async (req, res) => {
 
 	if (User.findOne({ email })) {
 		user.feed.texto.push(message);
+		user.save();
 		return res.send({ user });
 	}
 });
