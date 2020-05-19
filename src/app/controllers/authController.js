@@ -37,6 +37,15 @@ router.get('/get_id', async (req, res) => {
 	}
 });
 
+router.get('/get_feeds', async (req, res) => {
+	try {
+		res.send(await feed.find().populate('user'));
+	} catch (err) {
+		console.log(err);
+		res.status(400).send({ error: 'Email not found!' });
+	}
+});
+
 router.post('/register', async (req, res) => {
 	const { email } = req.body;
 
