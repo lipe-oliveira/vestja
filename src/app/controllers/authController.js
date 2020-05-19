@@ -22,7 +22,12 @@ router.post('/send', async (req, res) => {
 
 	if (User.findOne({ email })) {
 		user.update({ _id: id }, { $push: { 'feed.texto': message } }, function (err, mode) {
-			res.send(user);
+			if (err) {
+				console.log(err);
+			}
+			if (model) {
+				res.send(user);
+			}
 		});
 	}
 });
