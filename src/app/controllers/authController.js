@@ -15,20 +15,11 @@ function generateToken(params = {}) {
 	return token;
 }
 
-router.post('/send', async (req, res) => {
+router.put('/sendfeed/:email', async (req, res) => {
 	try {
-		const { email, message } = req.body;
+		const user = await User.findByIdAndUpdate(req.params.email, req.body, { new: true });
 
-		const project = new feed({ texto: message });
-
-		const user = User.findOne({ email });
-
-		user.salvos.push(project);
-		(await user).save();
-
-		(await user).populate('salvos');
-
-		return res.send({ user });
+		return res.send(user);
 	} catch (err) {
 		console.log(`erro: ${err}`);
 		return res.status(400).send({ erro: 'Cannot create new project!' });
