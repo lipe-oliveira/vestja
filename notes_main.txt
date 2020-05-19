@@ -8,3 +8,8 @@ BIBLIOTECAS:
 DEPLOY ON HEROKU:
 https://scotch.io/tutorials/how-to-deploy-a-node-js-app-to-heroku
 heroku logs --tail --app your_app_name
+
+
+git add .
+git commit -m aaa
+git push
