@@ -37,5 +37,5 @@ const schema_project = new mongoose.Schema({
 	}
 });
 
-const User = mongoose.model('User_Feeds', schema_project);
+const User = mongoose.model('user_feeds', schema_project);
 module.exports = User;

@@ -28,33 +28,33 @@ const schema = new mongoose.Schema({
 	salvos: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User_feeds'
+			ref: 'user_feeds'
 		}
 	],
-	receitas: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'receitas'
-		}
-	],
-	feed: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'feed'
-		}
-	],
-	restaurantes: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'restaurantes'
-		},
-		{
-			rate: {
-				type: String,
-				required: false
-			}
-		}
-	],
+	// receitas: [
+	// 	{
+	// 		type: mongoose.Schema.Types.ObjectId,
+	// 		ref: 'receitas'
+	// 	}
+	// ],
+	// feed: [
+	// 	{
+	// 		type: mongoose.Schema.Types.ObjectId,
+	// 		ref: 'feed'
+	// 	}
+	// ],
+	// restaurantes: [
+	// 	{
+	// 		type: mongoose.Schema.Types.ObjectId,
+	// 		ref: 'restaurantes'
+	// 	},
+	// 	{
+	// 		rate: {
+	// 			type: String,
+	// 			required: false
+	// 		}
+	// 	}
+	// ],
 	createdAt: {
 		type: Date,
 		default: Date.now

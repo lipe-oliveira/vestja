@@ -15,16 +15,13 @@ function generateToken(params = {}) {
 	return token;
 }
 
-router.post('/send', async (req, res) => {
-	const { email, message } = req.body;
-	const user = await User.findOne({ email }).select('+password');
-	const { id } = user;
-	user.feed.texto = [message];
-	console.log(user.feed);
-
-	if (User.findOne({ email })) {
-		const update = await User.findByIdAndUpdate(id, user, { new: true });
-		res.send(update);
+router.put('/send', async (req, res) => {
+	try {
+		const project = await User.find().populate('salvos']);
+		return res.send({ project });
+	} catch (err) {
+		console.log(`erro: ${err}`);
+		return res.status(400).send({ erro: 'Cannot create new project!' });
 	}
 });
 
