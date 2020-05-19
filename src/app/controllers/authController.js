@@ -15,9 +15,9 @@ function generateToken(params = {}) {
 	return token;
 }
 
-router.put('/send_feed/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
 	try {
-		const user = await User.findByIdAndUpdate(req.params.email, req.body, { new: true });
+		const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
 		return res.send(user);
 	} catch (err) {
