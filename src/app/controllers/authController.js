@@ -20,17 +20,17 @@ router.post('/send', async (req, res) => {
 	const user = await User.findOne({ email }).select('+password');
 	const { id } = user;
 
-	if (User.findOne({ email })) {
-		User.findOneAndUpdate({"_id":id},{
-			$push: { "feed" : message}
-		}
-		{safe: true, upsert:true},
-		function(err, model){
-			return res.send({ user })
-		});
+	// if (User.findOne({ email })) {
+	// 	User.findOneAndUpdate({"_id":id},{
+	// 		$push: { "feed" : message}
+	// 	}
+	// 	{safe: true, upsert:true},
+	// 	function(err, model){
 
-		;
-	}
+	// 	});
+
+	// 	;
+	// }
 });
 
 router.post('/register', async (req, res) => {
