@@ -20,7 +20,7 @@ router.post('/send', async (req, res) => {
 	const user = await User.findOne({ email }).select('+password');
 
 	if (User.findOne({ email })) {
-		user.feed.texto.push(message);
+		user.feed.push({ texto: message });
 		user.save();
 		return res.send({ user });
 	}
