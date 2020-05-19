@@ -39,7 +39,7 @@ router.get('/get_id', async (req, res) => {
 
 router.get('/get_feeds', async (req, res) => {
 	try {
-		res.send(await feed.find().populate('user'));
+		res.send(await feed.find().populate('user', 'email'));
 	} catch (err) {
 		console.log(err);
 		res.status(400).send({ error: 'Email not found!' });
@@ -94,7 +94,7 @@ router.post('/feed', async (req, res) => {
 		console.log('/feed');
 
 		await feed.create(req.body);
-		const feeder = await feed.find().populate(['user']);
+		const feeder = await feed.find().populate('user', 'email');
 
 		return res.send({ feeder });
 		//return res.send({ user, token: generateToken({ id: user.id }) });
@@ -104,9 +104,9 @@ router.post('/feed', async (req, res) => {
 	}
 });
 
-router.get('/', async (req, res) => {
+router.get('/get_users', async (req, res) => {
 	try {
-		const user = await feed.find().populate(['user']);
+		const user = await User.find();
 		return res.send({ user });
 	} catch (err) {}
 });
