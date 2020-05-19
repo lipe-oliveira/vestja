@@ -28,7 +28,7 @@ const schema = new mongoose.Schema({
 	salvos: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'user_feeds'
+			ref: 'User_feeds'
 		}
 	],
 	receitas: [
@@ -61,7 +61,7 @@ const schema = new mongoose.Schema({
 	}
 });
 
-schema.pre('save', async function(next) {
+schema.pre('save', async function (next) {
 	const hash = await bcrypt.hash(this.password, 10);
 	this.password = hash;
 

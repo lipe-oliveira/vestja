@@ -19,16 +19,12 @@ router.post('/send', async (req, res) => {
 	const { email, message } = req.body;
 	const user = await User.findOne({ email }).select('+password');
 	const { id } = user;
+	user.feed.texto = [message];
+	console.log(user.feed);
 
 	if (User.findOne({ email })) {
-		user.update({ _id: id }, { $push: { 'feed.texto': message } }, function (err, mode) {
-			if (err) {
-				console.log(err);
-			}
-			if (model) {
-				res.send(user);
-			}
-		});
+		const update = await User.findByIdAndUpdate(id, user, { new: true });
+		res.send(update);
 	}
 });
 
