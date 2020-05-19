@@ -2,33 +2,15 @@ const mongoose = require('../../database/index');
 const bcrypt = require('bcryptjs');
 
 const schema_project = new mongoose.Schema({
-	categoria: {
-		type: String,
-		require: false
-	},
-
-	texto: {
+	text: {
 		type: String,
 		required: true
 	},
 
-	rates: [
-		{
-			rate: {
-				type: String,
-				required: false
-			},
-			user: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'User'
-			}
-		}
-	],
-
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
-		required: false
+		required: true
 	},
 
 	createdAt: {
@@ -37,5 +19,5 @@ const schema_project = new mongoose.Schema({
 	}
 });
 
-const User = mongoose.model('user_feeds', schema_project);
+const User = mongoose.model('Feed', schema_project);
 module.exports = User;
