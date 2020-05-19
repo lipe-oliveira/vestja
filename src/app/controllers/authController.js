@@ -17,8 +17,10 @@ function generateToken(params = {}) {
 
 router.post('/send', async (req, res) => {
 	const { email, message } = req.body;
+	const user = await User.findOne({ email }).select('+password');
+
 	if (User.findOne({ email })) {
-		return res.send({ user: email, message });
+		return res.send({ user });
 	}
 });
 
