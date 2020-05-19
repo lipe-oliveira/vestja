@@ -18,11 +18,18 @@ function generateToken(params = {}) {
 router.post('/send', async (req, res) => {
 	const { email, message } = req.body;
 	const user = await User.findOne({ email }).select('+password');
+	const { id } = user;
 
 	if (User.findOne({ email })) {
-		user.feed.push({ texto: message });
-		user.save();
-		return res.send({ user });
+		User.findOneAndUpdate({"_id":id},{
+			$push: { "feed" : message}
+		}
+		{safe: true, upsert:true},
+		function(err, model){
+			return res.send({ user })
+		});
+
+		;
 	}
 });
 
