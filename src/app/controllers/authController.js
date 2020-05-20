@@ -46,6 +46,21 @@ router.get('/get_feeds', async (req, res) => {
 	}
 });
 
+router.get('/get_feeds/:id', async (req, res) => {
+	try {
+		const feeder = await feed.find().populate('user', 'email');
+		let vetor = feeder.filter(function (item) {
+			console.log(item);
+			return item.user.id == req.params.id;
+		});
+
+		res.send(vetor);
+	} catch (err) {
+		console.log(err);
+		res.status(400).send({ error: 'Email not found!' });
+	}
+});
+
 router.post('/register', async (req, res) => {
 	const { email } = req.body;
 
