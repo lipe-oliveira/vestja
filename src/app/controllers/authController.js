@@ -26,7 +26,7 @@ router.put('/update/:id', async (req, res) => {
 	}
 });
 
-router.get('/get_id', async (req, res) => {
+router.post('/post_get_id', async (req, res) => {
 	try {
 		const { email } = req.body;
 		const { id } = await User.findOne({ email });
@@ -39,7 +39,7 @@ router.get('/get_id', async (req, res) => {
 
 router.get('/get_feeds', async (req, res) => {
 	try {
-		res.send(await feed.find().populate('user', 'email'));
+		res.send(await feed.find().populate('user'));
 	} catch (err) {
 		console.log(err);
 		res.status(400).send({ error: 'Email not found!' });
@@ -48,7 +48,7 @@ router.get('/get_feeds', async (req, res) => {
 
 router.get('/get_feeds/:id', async (req, res) => {
 	try {
-		const feeder = await feed.find().populate('user', 'email');
+		const feeder = await feed.find().populate(['user', 'email']);
 		let vetor = feeder.filter(function (item) {
 			console.log(item);
 			return item.user.id == req.params.id;
@@ -59,6 +59,13 @@ router.get('/get_feeds/:id', async (req, res) => {
 		console.log(err);
 		res.status(400).send({ error: 'Email not found!' });
 	}
+});
+
+router.get('/get_users', async (req, res) => {
+	try {
+		const user = await User.find();
+		return res.send({ user });
+	} catch (err) {}
 });
 
 router.post('/register', async (req, res) => {
@@ -109,7 +116,7 @@ router.post('/feed', async (req, res) => {
 		console.log('/feed');
 
 		await feed.create(req.body);
-		const feeder = await feed.find().populate('user', 'email');
+		const feeder = await feed.find().populate('user');
 
 		return res.send({ feeder });
 		//return res.send({ user, token: generateToken({ id: user.id }) });
@@ -117,13 +124,6 @@ router.post('/feed', async (req, res) => {
 		console.log('erro: ' + err);
 		return res.status(400).send({ error: `Falha de autenticação!` });
 	}
-});
-
-router.get('/get_users', async (req, res) => {
-	try {
-		const user = await User.find();
-		return res.send({ user });
-	} catch (err) {}
 });
 
 module.exports = (app) => app.use('/users', router);
