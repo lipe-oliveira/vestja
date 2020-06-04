@@ -17,6 +17,10 @@ const schema = new mongoose.Schema({
 		required: true,
 		select: false
 	},
+	img: {
+		data: Buffer,
+		type: String;
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now

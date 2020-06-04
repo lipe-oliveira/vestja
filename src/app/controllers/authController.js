@@ -126,4 +126,19 @@ router.post('/feed', async (req, res) => {
 	}
 });
 
+router.put('/post_image', async (req, res) => {
+	try {
+		const { id, image } = req.body;
+		const user = await User.findById(id);
+		user.image = image;
+
+		const user = await User.findByIdAndUpdate(id, user);
+
+		res.send({ user });
+	} catch (err) {
+		console.log('erro: ' + err);
+		return res.status(400).send({ error: `A imagem não pode ser inserida!` });
+	}
+});
+
 module.exports = (app) => app.use('/users', router);
