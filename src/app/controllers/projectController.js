@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const router = express.Router();
 const Project = require('../models/project');
@@ -96,3 +97,4 @@ router.delete('/:projectId', async (req, res) => {
 module.exports = (app) => {
 	app.use('/projects', router);
 };
+*/
