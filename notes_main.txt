@@ -13,3 +13,5 @@ heroku logs --tail --app your_app_name
 git add .
 git commit -m aaa
 git push
+
+heroku logs -t --app bibiboom-backend

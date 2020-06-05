@@ -130,7 +130,7 @@ router.put('/post_image', async (req, res) => {
 	try {
 		const { id, image } = req.body;
 		const user = await User.findById(id);
-		await (user.img = image);
+		await (user.img = new Buffer(image.split(','), 'base64'));
 		console.log(user);
 
 		const userr = await User.findByIdAndUpdate(id, user);
@@ -144,8 +144,9 @@ router.put('/post_image', async (req, res) => {
 
 router.get('/get_image', async (req, res) => {
 	try {
+		console.log('GET_IMAGE');
 		const { id } = req.body;
-		const user = await (await User.findById(id)).populate(['image']);
+		const user = await User.findById(id);
 		console.log({ user });
 
 		res.send({ user });
