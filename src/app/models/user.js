@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
 	},
 	img: {
 		type: String,
-		data: Buffer
+		required: false
 	},
 	createdAt: {
 		type: Date,

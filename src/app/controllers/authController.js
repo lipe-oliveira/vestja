@@ -130,9 +130,23 @@ router.put('/post_image', async (req, res) => {
 	try {
 		const { id, image } = req.body;
 		const user = await User.findById(id);
-		user.image = image;
+		await (user.img = image);
+		console.log(user);
 
-		user = await User.findByIdAndUpdate(id, user);
+		const userr = await User.findByIdAndUpdate(id, user);
+
+		res.send({ userr });
+	} catch (err) {
+		console.log('erro: ' + err);
+		return res.status(400).send({ error: `A imagem não pode ser inserida!` });
+	}
+});
+
+router.get('/get_image', async (req, res) => {
+	try {
+		const { id } = req.body;
+		const user = await (await User.findById(id)).populate(['image']);
+		console.log({ user });
 
 		res.send({ user });
 	} catch (err) {
