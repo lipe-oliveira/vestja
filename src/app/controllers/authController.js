@@ -132,7 +132,7 @@ router.put('/post_image', async (req, res) => {
 		const user = await User.findById(id);
 		user.image = image;
 
-		user = await User.findByIdAndUpdate(id, user);
+		const user = await User.findByIdAndUpdate(id, user);
 
 		res.send({ user });
 	} catch (err) {
