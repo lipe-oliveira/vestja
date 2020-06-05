@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const feed = require('../models/user_feeds');
+const Image = require('../models/user_feeds');
 const auth = require('../../config/auth.json');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
@@ -126,16 +127,13 @@ router.post('/feed', async (req, res) => {
 	}
 });
 
-router.put('/post_image', async (req, res) => {
+router.post('/post_image', async (req, res) => {
 	try {
-		const { id, image } = req.body;
-		const user = await User.findById(id);
-		await (user.img = new Buffer(image.split(','), 'base64'));
-		console.log(user);
+		await Image.create(req.body);
 
-		const userr = await User.findByIdAndUpdate(id, user);
+		const img = await Image.find().populate('user');
 
-		res.send({ userr });
+		res.send({ img });
 	} catch (err) {
 		console.log('erro: ' + err);
 		return res.status(400).send({ error: `A imagem não pode ser inserida!` });
