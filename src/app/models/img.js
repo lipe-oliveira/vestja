@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs');
 
 const schema_project = new mongoose.Schema({
 	imagem: {
-		type: String,
+		type: Buffer,
+		contentType: String,
 		required: true
 	},
 
