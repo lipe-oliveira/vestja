@@ -129,15 +129,19 @@ router.post('/feed', async (req, res) => {
 
 router.post('/post_image', async (req, res) => {
 	try {
-		// if (Image.findOne(req.body.user)) {
-		// 	await Image.findByIdAndDelete(req.body.user);
-		// 	console.log('Já possui imagem. Substituindo...');
-		// } else {
-		// 	await Image.create(req.body);
-		// }
+		const { user } = req.body;
+		let img = await Image.findOne({ user });
+		console.log(img);
 
-		await Image.create(req.body);
-		let img = await Image.find().populate('user');
+		if (img != null) {
+			console.log('Já possui imagem. Substituindo...\n');
+			await Image.findOneAndUpdate({ user }, req.body);
+		} else {
+			console.log('NOT EXISTS!');
+			await Image.create(req.body);
+		}
+
+		img = await Image.findOne({ user }).populate('user');
 		res.send({ img });
 	} catch (err) {
 		console.log('erro: ' + err);
