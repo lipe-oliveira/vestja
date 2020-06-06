@@ -129,10 +129,15 @@ router.post('/feed', async (req, res) => {
 
 router.post('/post_image', async (req, res) => {
 	try {
+		// if (Image.findOne(req.body.user)) {
+		// 	await Image.findByIdAndDelete(req.body.user);
+		// 	console.log('Já possui imagem. Substituindo...');
+		// } else {
+		// 	await Image.create(req.body);
+		// }
+
 		await Image.create(req.body);
-
-		const img = await Image.find().populate('user');
-
+		let img = await Image.find().populate('user');
 		res.send({ img });
 	} catch (err) {
 		console.log('erro: ' + err);
@@ -140,17 +145,19 @@ router.post('/post_image', async (req, res) => {
 	}
 });
 
-router.get('/get_image', async (req, res) => {
+router.post('/get_image', async (req, res) => {
 	try {
-		console.log('GET_IMAGE');
-		const { id } = req.body;
-		const user = await User.findById(id);
-		console.log({ user });
+		const { user } = req.body;
 
-		res.send({ user });
+		let imag = await Image.findOne({ user });
+		let { imagem } = imag;
+
+		console.log({ imagem });
+
+		res.send({ imagem });
 	} catch (err) {
 		console.log('erro: ' + err);
-		return res.status(400).send({ error: `A imagem não pode ser inserida!` });
+		return res.status(400).send({ error: `A imagem não pode ser captada!` });
 	}
 });
 
