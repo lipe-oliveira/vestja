@@ -3,8 +3,9 @@ const bcrypt = require('bcryptjs');
 
 const schema_project = new mongoose.Schema({
 	imagem: {
-		type: Buffer,
-		contentType: String,
+		type: String,
+		//timestamps: true,
+		setMaxListeners: 100000000000000000000000000000000000000000000000,
 		required: true
 	},
 
