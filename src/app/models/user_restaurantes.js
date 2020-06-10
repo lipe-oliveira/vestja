@@ -1,4 +1,4 @@
-mongoose = require('mongoose');
+let mongoose = require('../../database/index');
 
 const schema = new mongoose.Schema({
 	nome: {
@@ -6,16 +6,28 @@ const schema = new mongoose.Schema({
 		required: true
 	},
 	latlng: {
-		type: Point,
-		coordinates: []
+		type: String,
+		required: true
 	},
-	rating: [
+	descript: {
+		type: String,
+		required: true
+	},
+	id: {
+		type: String,
+		required: true
+	},
+	ratings: [
 		{
 			user: {
-				type: mongoose.Types.Schema.ObjectId,
-				ref: 'User'
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'User',
+				required: true
 			},
 			rate: {
+				type: String
+			},
+			description: {
 				type: String
 			}
 		}

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const feed = require('../models/user_feeds');
 const Image = require('../models/img');
+const Restaurante = require('../models/user_restaurantes');
 const auth = require('../../config/auth.json');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
@@ -127,6 +128,43 @@ router.post('/feed', async (req, res) => {
 	}
 });
 
+router.get('/get_restaurantes', async (req, res) => {
+	try {
+		const resp = await Restaurante.find({});
+		res.send(resp);
+	} catch (err) {
+		res.status(400).send(err);
+	}
+});
+
+router.post('/post_restaurantes', async (req, res) => {
+	try {
+		const { id } = req.body;
+		if (await Restaurante.findOne({ id })) {
+			const { ratings } = req.body;
+
+			let restaurante = await Restaurante.findOne({ id });
+			console.log(restaurante);
+
+			let pusher = {
+				user: ratings[0],
+				rate: ratings[1],
+				description: ratings[2]
+			};
+
+			await restaurante.ratings.push(pusher);
+			await restaurante.save();
+
+			res.send(await Restaurante.findOne({ id }).populate('ratings.user', ['name', 'email']));
+		} else {
+			res.send(await (await Restaurante.create(req.body)).populate('ratings'));
+		}
+	} catch (err) {
+		res.status(404).send('Já existe esse restaurante!');
+		console.log(err);
+	}
+});
+
 router.post('/post_image', async (req, res) => {
 	try {
 		const { user } = req.body;
@@ -141,7 +179,7 @@ router.post('/post_image', async (req, res) => {
 			await Image.create(req.body);
 		}
 
-		img = await Image.findOne({ user }).populate('user');
+		img = await Image.findOne({ user }).populate('user', 'rate', 'description');
 		res.send({ img });
 	} catch (err) {
 		console.log('erro: ' + err);
