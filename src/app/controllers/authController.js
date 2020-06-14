@@ -185,7 +185,9 @@ router.post('/post_restaurantes_check', async (req, res) => {
 	try {
 		const { id } = req.body;
 		if (await Restaurante.findOne({ id })) {
-			res.send(await Restaurante.findOne({ id }).id);
+			console.log(id);
+
+			return res.send('1');
 		} else {
 			res.status(400).send('0');
 		}
