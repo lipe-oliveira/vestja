@@ -221,6 +221,24 @@ router.post('/post_restaurantes_img', async (req, res) => {
 	}
 });
 
+router.post('/post_restaurantes_get_img', async (req, res) => {
+	try {
+		const { id } = req.body;
+		if (await Restaurante.findOne({ id })) {
+			let restaurante = await Restaurante.findOne({ id });
+			let fotos = await restaurante.get('fotos');
+			console.log(fotos);
+
+			res.send(fotos);
+		} else {
+			res.status(400).send('Restaurante não encontrado!');
+		}
+	} catch (err) {
+		res.status(404).send('Já existe esse restaurante!');
+		console.log(err);
+	}
+});
+
 router.post('/post_image', async (req, res) => {
 	try {
 		const { user } = req.body;
