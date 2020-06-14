@@ -17,12 +17,17 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	fotos: [
+		{
+			type: String
+		}
+	],
 	ratings: [
 		{
 			user: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'User',
-				required: true
+				required: false
 			},
 			rate: {
 				type: String
