@@ -189,7 +189,7 @@ router.post('/post_restaurantes_check', async (req, res) => {
 
 			return res.send('1');
 		} else {
-			res.status(400).send('0');
+			res.send('0');
 		}
 	} catch (err) {
 		res.status(404).send('Error!');
