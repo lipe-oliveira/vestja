@@ -140,42 +140,41 @@ router.get('/get_restaurantes', async (req, res) => {
 router.post('/post_restaurantes', async (req, res) => {
 	try {
 		const { id } = req.body;
-		if (req.body.has)
-			if (await Restaurante.findOne({ id })) {
-				const { ratings } = req.body;
+		if (await Restaurante.findOne({ id })) {
+			const { ratings } = req.body;
 
-				let restaurante = await Restaurante.findOne({ id });
-				console.log(restaurante);
+			let restaurante = await Restaurante.findOne({ id });
+			console.log(restaurante);
 
-				let pusher = {
-					user: ratings[0],
-					rate: ratings[1],
-					description: ratings[2]
-				};
+			let pusher = {
+				user: ratings[0],
+				rate: ratings[1],
+				description: ratings[2]
+			};
 
-				await restaurante.ratings.push(pusher);
-				await restaurante.save();
+			await restaurante.ratings.push(pusher);
+			await restaurante.save();
 
-				res.send(await Restaurante.findOne({ id }).populate('ratings.user', ['name', 'email']));
-			} else {
-				const { ratings } = req.body;
+			res.send(await Restaurante.findOne({ id }).populate('ratings.user', ['name', 'email']));
+		} else {
+			const { ratings } = req.body;
 
-				let pusher = {
-					user: ratings[0],
-					rate: ratings[1],
-					description: ratings[2]
-				};
+			let pusher = {
+				user: ratings[0],
+				rate: ratings[1],
+				description: ratings[2]
+			};
 
-				await delete req.body.ratings;
-				await Restaurante.create(req.body);
+			await delete req.body.ratings;
+			await Restaurante.create(req.body);
 
-				let restaurante = await Restaurante.findOne({ id });
+			let restaurante = await Restaurante.findOne({ id });
 
-				await restaurante.ratings.push(pusher);
-				await restaurante.save();
+			await restaurante.ratings.push(pusher);
+			await restaurante.save();
 
-				res.send(await Restaurante.findOne({ id }).populate('ratings.user', ['name', 'email']));
-			}
+			res.send(await Restaurante.findOne({ id }).populate('ratings.user', ['name', 'email']));
+		}
 	} catch (err) {
 		res.status(404).send('Já existe esse restaurante!');
 		console.log(err);
