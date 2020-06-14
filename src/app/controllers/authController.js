@@ -131,7 +131,7 @@ router.post('/feed', async (req, res) => {
 router.get('/get_restaurantes', async (req, res) => {
 	try {
 		const resp = await Restaurante.find({});
-		res.send(resp);
+		res.send(resp).populate('fotos');
 	} catch (err) {
 		res.status(400).send(err);
 	}
@@ -181,6 +181,20 @@ router.post('/post_restaurantes', async (req, res) => {
 	}
 });
 
+router.post('/post_restaurantes_check', async (req, res) => {
+	try {
+		const { id } = req.body;
+		if (await Restaurante.findOne({ id })) {
+			res.send(await Restaurante.findOne({ id }).id);
+		} else {
+			res.status(400).send('0');
+		}
+	} catch (err) {
+		res.status(404).send('Error!');
+		console.log(err);
+	}
+});
+
 router.post('/post_restaurantes_img', async (req, res) => {
 	try {
 		const { id, img } = req.body;
@@ -189,10 +203,10 @@ router.post('/post_restaurantes_img', async (req, res) => {
 			console.log(restaurante);
 
 			let pusher = {
-				fotos: img
+				img: img
 			};
 
-			await restaurante.ratings.push(pusher);
+			await restaurante.fotos.push(pusher);
 			await restaurante.save();
 
 			res.send(await Restaurante.findOne({ id }));
