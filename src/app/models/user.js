@@ -21,6 +21,10 @@ const schema = new mongoose.Schema({
 		type: Buffer,
 		required: false
 	},
+	tipo: {
+		type: String,
+		required: false
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now
