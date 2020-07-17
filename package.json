@@ -21,7 +21,7 @@
 		"g1": "git add .",
 		"g2": "git commit -m auto",
 		"g3": "git push",
-		"gall": "yarn g1 ;; yarn g2 ;; yarn g3"
+		"gall": "yarn g1 ; yarn g2 ; yarn g3"
 	},
 	"repository": "https://github.com/lipe-oliveira/bibiboom/",
 	"author": "lipe-oliveira <felipeoliveira.b@gmail.com>"
