@@ -282,7 +282,7 @@ router.post('/post_receita', async (req, res) => {
 	try {
 		const { user } = req.body;
 		res.send(req.body)
-		/*
+		
 		if (await User.findById(user)) {
 			console.log(user);
 
@@ -291,6 +291,7 @@ router.post('/post_receita', async (req, res) => {
 			await Receita.create(req.body)
 			res.send(await (await Receita.find({}).populate("user")));
 		}
+		/*
 		 else {
 			const { ratings } = req.body;
 
@@ -319,7 +320,7 @@ router.post('/post_receita', async (req, res) => {
 
 router.get('/get_receita', async (req, res) => {
 	try {
-		res.send(res.send(await (await Receita.find({}).populate("user"))));
+		res.send(res.send(await Receita.find({})));
 		
 		/*
 		if (await User.findById(user)) {
