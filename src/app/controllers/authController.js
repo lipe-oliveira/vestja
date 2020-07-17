@@ -289,11 +289,11 @@ router.post('/post_receita', async (req, res) => {
 
 			ing = ing.substring(1);
 			ing = ing.slice(0, -1);
-			console.log(ing);
 
 			ing = ing.replace("[", "{");
 			ing = ing.replace("]", "}");
 
+			console.log(ing);
 
 			const { nome } = req.body;
 			
