@@ -288,7 +288,7 @@ router.post('/post_receita', async (req, res) => {
 			console.log(ingredientes);
 
 			ing = ing.substring(1);
-			ing = ing.substring(ing.length);
+			ing = ing.substring(ing.length - 1);
 			console.log(ing);
 
 			ing = ing.replace("[", "{");
