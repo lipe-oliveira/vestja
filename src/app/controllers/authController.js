@@ -281,7 +281,6 @@ router.post('/get_image', async (req, res) => {
 router.post('/post_receita', async (req, res) => {
 	try {
 		const { user, ingredientes } = req.body;
-		res.send(req.body)
 		
 		if (await User.findById(user)) {
 			console.log(ingredientes);
