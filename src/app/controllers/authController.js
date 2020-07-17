@@ -284,9 +284,9 @@ router.post('/post_receita', async (req, res) => {
 		
 		if (await User.findById(user)) {
 			ingredientes = ingredientes.substring(1);
-			ingredientes = ingredientes.substring(ingredientes.length);
-			ingredientes.replace("[", "{");
-			ingredientes.replace("]", "}");
+			//ingredientes = ingredientes.substring(ingredientes.length);
+			//ingredientes.replace("[", "{");
+			//ingredientes.replace("]", "}");
 
 			console.log(ingredientes);
 
