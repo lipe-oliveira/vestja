@@ -1,8 +1,14 @@
-mongoose = require('mongoose');
+let mongoose = require('../../database/index');
 
 const schema = new mongoose.Schema({
 	nome: {
 		type: String,
+		required: true
+	},
+
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
 		required: true
 	},
 
@@ -25,7 +31,7 @@ const schema = new mongoose.Schema({
 	},
 
 	imagem: {
-		type: Buffer
+		type: String
 		//required:true
 	}
 });
