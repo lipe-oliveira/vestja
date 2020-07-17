@@ -283,7 +283,13 @@ router.post('/post_receita', async (req, res) => {
 		const { user, ingredientes } = req.body;
 		
 		if (await User.findById(user)) {
-			console.log("size:" + ingredientes.length);
+			ingredientes = ingredientes.substring(1);
+			ingredientes = ingredientes.substring(ingredientes.length);
+			ingredientes.replace("[", "{");
+			ingredientes.replace("]", "}");
+
+			console.log(ingredientes);
+
 
 
 			const { nome } = req.body;
