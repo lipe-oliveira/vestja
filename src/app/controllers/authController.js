@@ -283,7 +283,7 @@ router.post('/post_receita', async (req, res) => {
 		const { user, ingredientes } = req.body;
 		
 		if (await User.findById(user)) {
-			console.log(ingredientes.length);
+			console.log(ingredientes[0]);
 
 
 			const { nome } = req.body;
