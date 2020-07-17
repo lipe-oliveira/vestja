@@ -283,19 +283,22 @@ router.post('/post_receita', async (req, res) => {
 		const { user, ingredientes } = req.body;
 		
 		if (await User.findById(user)) {
-			ingredientes = ingredientes.substring(1);
-			//ingredientes = ingredientes.substring(ingredientes.length);
-			//ingredientes.replace("[", "{");
-			//ingredientes.replace("]", "}");
-
+			let ing = ingredientes.toString();
+			console.log(typeof ing);
 			console.log(ingredientes);
+			console.log(ing);
 
 
+			ing = ing.substring(1);
+			ing = ing.substring(ing.length);
+			ing.replace("[", "{");
+			ing.replace("]", "}");
 
 			const { nome } = req.body;
 			
+			
 			await Receita.create(req.body)
-			res.send(await (await Receita.find({}).populate("user")));
+			res.send(await (await Receita.find({})));
 		}
 		/*
 		 else {
