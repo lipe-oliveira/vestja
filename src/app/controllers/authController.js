@@ -281,7 +281,8 @@ router.post('/get_image', async (req, res) => {
 router.post('/post_receita', async (req, res) => {
 	try {
 		const { user } = req.body;
-		console.log(user);
+		res.send(req.body)
+		/*
 		if (await User.findById(user)) {
 			console.log(user);
 
@@ -290,7 +291,46 @@ router.post('/post_receita', async (req, res) => {
 			await Receita.create(req.body)
 			res.send(await (await Receita.find({}).populate("user")));
 		}
-		/* else {
+		 else {
+			const { ratings } = req.body;
+
+			let pusher = {
+				user: ratings[0],
+				rate: ratings[1],
+				description: ratings[2]
+			};
+
+			await delete req.body.ratings;
+			await Restaurante.create(req.body);
+
+			let restaurante = await Restaurante.findOne({ id });
+
+			await restaurante.ratings.push(pusher);
+			await restaurante.save();
+
+			res.send(await Restaurante.findOne({ id }).populate('ratings.user', ['name', 'email']));
+		}
+		*/
+	} catch (err) {
+		res.status(404).send('Já existe esse restaurante!');
+		console.log(err);
+	}
+});
+
+router.get('/get_receita', async (req, res) => {
+	try {
+		res.send(res.send(await (await Receita.find({}).populate("user"))));
+		
+		/*
+		if (await User.findById(user)) {
+			console.log(user);
+
+			const { nome } = req.body;
+			
+			await Receita.create(req.body)
+			res.send(await (await Receita.find({}).populate("user")));
+		}
+		 else {
 			const { ratings } = req.body;
 
 			let pusher = {
