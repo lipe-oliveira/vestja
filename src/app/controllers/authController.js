@@ -286,13 +286,13 @@ router.post('/post_receita', async (req, res) => {
 			let ing = ingredientes.toString();
 			console.log(typeof ing);
 			console.log(ingredientes);
-			console.log(ing);
-
 
 			ing = ing.substring(1);
 			ing = ing.substring(ing.length);
 			ing.replace("[", "{");
 			ing.replace("]", "}");
+
+			console.log(ing);
 
 			const { nome } = req.body;
 			
