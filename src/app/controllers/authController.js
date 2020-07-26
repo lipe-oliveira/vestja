@@ -142,9 +142,13 @@ router.post('/post_restaurantes', async (req, res) => {
 	try {
 		const { id } = req.body;
 		if (await Restaurante.findOne({ id })) {
-			const { ratings } = req.body;
+			const { ratings, descript } = req.body;
 
 			let restaurante = await Restaurante.findOne({ id });
+
+			if(await Restaurante.findOne(descript)){
+				restaurante.deleteOne(descript);
+			}
 			console.log(restaurante);
 
 			let pusher = {
@@ -156,9 +160,9 @@ router.post('/post_restaurantes', async (req, res) => {
 			await restaurante.ratings.push(pusher);
 			await restaurante.save();
 
-			res.send(await Restaurante.findOne({ id }).populate('ratings.user', ['name', 'email']));
+			res.send(await Restaurante.findOne({ id }));
 		} else {
-			const { ratings } = req.body;
+			const { ratings} = req.body;
 
 			let pusher = {
 				user: ratings[0],
