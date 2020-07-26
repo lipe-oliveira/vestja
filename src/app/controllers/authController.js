@@ -141,6 +141,7 @@ router.get('/get_restaurantes', async (req, res) => {
 
 router.post('/post_restaurantes', async (req, res) => {
 	try {
+		console.log(req.body);
 		const { id } = req.body;
 		if (await Restaurante.findOne({ id })) {
 			const { ratings, descript } = req.body;
