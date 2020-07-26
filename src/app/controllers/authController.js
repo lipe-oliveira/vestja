@@ -132,6 +132,7 @@ router.post('/feed', async (req, res) => {
 router.get('/get_restaurantes', async (req, res) => {
 	try {
 		const resp = await Restaurante.find({});
+		resp.delete = resp.fotos;
 		res.send(resp).populate('fotos');
 	} catch (err) {
 		res.status(400).send(err);
@@ -149,13 +150,15 @@ router.post('/post_restaurantes', async (req, res) => {
 			if(await Restaurante.findOne(descript)){
 				restaurante.deleteOne(descript);
 			}
-			console.log(restaurante);
 
 			let pusher = {
 				user: ratings[0],
 				rate: ratings[1],
 				description: ratings[2]
 			};
+
+			console.log(restaurante);
+			console.log(pusher);
 
 			await restaurante.ratings.push(pusher);
 			await restaurante.save();
