@@ -144,7 +144,7 @@ router.post('/post_restaurantes', async (req, res) => {
 		const { id } = req.body;
 		if (await Restaurante.findOne({ id })) {
 			const { ratings, descript } = req.body;
-			console.log(ratings);
+			console.log(descript);
 
 			let restaurante = await Restaurante.findOne({ id });
 
