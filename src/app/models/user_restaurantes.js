@@ -12,8 +12,7 @@ const schema = new mongoose.Schema({
 	descript: [
 		{
 			desc: {
-				type: String,
-				required: false
+				type: String
 			}
 		}
 	],
@@ -36,10 +35,10 @@ const schema = new mongoose.Schema({
 				required: false
 			},
 			rate: {
-				formType: String
+				type: String
 			},
 			description: {
-				formType: String
+				type: String
 			}
 		}
 	]

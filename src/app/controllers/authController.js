@@ -150,44 +150,38 @@ router.post('/post_restaurantes', async (req, res) => {
 
 			if(restaurante.toString().includes(descript)){
 				restaurante.descript = "";
-				console.log("achou");
+			}
+			else{
+				if(descript != undefined){
+					let pusher = {
+						desc: descript
+					};
+		
+					await restaurante.descript.push(pusher);
+					await restaurante.save();
+				}
+				console.log(descript);
+				
 			}
 
-			/*
-			let pusher = {
-				user: ratings[0],
-				rate: ratings[1],
-				description: ratings[2]
-			};
-
-			console.log(restaurante);
 			console.log(ratings);
-
-			await restaurante.ratings.push(pusher);
-			await restaurante.save();
-			*/
 
 			res.send(await Restaurante.findOne({ id }));
 		} else {
-			const { ratings} = req.body;
+			const { ratings, descript} = req.body;
 
-			/*
-			let pusher = {
-				user: ratings[0],
-				rate: ratings[1],
-				description: ratings[2]
-			};
-			*/
-
-			//await delete req.body.ratings;
 			await Restaurante.create(req.body);
 			
 			let restaurante = await Restaurante.findOne({ id });
 
-			//await restaurante.ratings.push(pusher);
-			//await restaurante.save();
+			let pusher = {
+				desc: descript
+			};
 
-			res.send(await Restaurante.findOne({ id }).populate('ratings.user', ['name', 'email']));
+			await restaurante.descript.push(pusher);
+			await restaurante.save();
+
+			res.send(await Restaurante.findOne({ id }));
 		}
 	} catch (err) {
 		res.status(404).send('Já existe esse restaurante!');
