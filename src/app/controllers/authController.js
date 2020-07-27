@@ -173,7 +173,9 @@ router.post('/post_restaurantes', async (req, res) => {
 			await restaurante.ratings.push(pusher);
 			await restaurante.save();
 
-			res.send(await Restaurante.findOne({ id }));
+			let rest = await Restaurante.findOne({ id });
+			rest.fotos = "";
+			res.send(rest);
 		} else {
 			const { ratings, descript} = req.body;
 
@@ -184,14 +186,12 @@ router.post('/post_restaurantes', async (req, res) => {
 
 			await Restaurante.create(req.body);
 			
-			let restaurante = await Restaurante.findOne({ id });
+			// let pusher = {
+			// 	desc: descript
+			// };
 
-			let pusher = {
-				desc: descript
-			};
-
-			await restaurante.descript.push(pusher);
-			await restaurante.save();
+			// await restaurante.descript.push(pusher);
+			// await restaurante.save();
 			
 			let rest = await Restaurante.findOne({ id });
 			res.fotos = "";
