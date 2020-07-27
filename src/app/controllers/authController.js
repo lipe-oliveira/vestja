@@ -173,7 +173,7 @@ router.post('/post_restaurantes', async (req, res) => {
 			await restaurante.descript.push(pusher);
 			await restaurante.save();
 
-			console.log("ratings: \n" + ratings);
+			console.log(ratings);
 
 			res.send(await Restaurante.findOne({ id }));
 		} else {
