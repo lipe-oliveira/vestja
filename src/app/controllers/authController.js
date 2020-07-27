@@ -163,6 +163,16 @@ router.post('/post_restaurantes', async (req, res) => {
 				
 			}
 
+			let split = ratings.split(",");
+			let pusher = {
+				user: split[0],
+				rate: split[1],
+				description: split[2]
+			};
+
+			await restaurante.descript.push(pusher);
+			await restaurante.save();
+
 			console.log("ratings: \n" + ratings);
 
 			res.send(await Restaurante.findOne({ id }));
