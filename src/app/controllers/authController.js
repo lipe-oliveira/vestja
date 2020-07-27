@@ -141,7 +141,7 @@ router.get('/get_restaurantes', async (req, res) => {
 
 router.post('/post_restaurantes', async (req, res) => {
 	try {
-		console.log(req.body);
+		//console.log(req.body);
 		const { id } = req.body;
 		if (await Restaurante.findOne({ id })) {
 			const { ratings, descript } = req.body;
@@ -160,11 +160,10 @@ router.post('/post_restaurantes', async (req, res) => {
 					await restaurante.descript.push(pusher);
 					await restaurante.save();
 				}
-				console.log(descript);
 				
 			}
 
-			console.log(ratings);
+			console.log("ratings: \n" + ratings);
 
 			res.send(await Restaurante.findOne({ id }));
 		} else {
@@ -187,8 +186,8 @@ router.post('/post_restaurantes', async (req, res) => {
 			await restaurante.save();
 			
 			let res = await Restaurante.findOne({ id });
-			delete res.fotos;
-			
+			res.fotos = "";
+
 			res.send();
 		}
 	} catch (err) {
