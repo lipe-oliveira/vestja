@@ -185,8 +185,11 @@ router.post('/post_restaurantes', async (req, res) => {
 
 			await restaurante.descript.push(pusher);
 			await restaurante.save();
-
-			res.send(await Restaurante.findOne({ id }));
+			
+			let res = await Restaurante.findOne({ id });
+			delete res.fotos;
+			
+			res.send();
 		}
 	} catch (err) {
 		res.status(404).send('Já existe esse restaurante!');
