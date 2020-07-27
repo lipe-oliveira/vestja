@@ -141,7 +141,6 @@ router.get('/get_restaurantes', async (req, res) => {
 
 router.post('/post_restaurantes', async (req, res) => {
 	try {
-		console.log(req.body);
 		const { id } = req.body;
 		if (await Restaurante.findOne({ id })) {
 			const { ratings, descript } = req.body;
@@ -165,6 +164,7 @@ router.post('/post_restaurantes', async (req, res) => {
 			}
 
 			let split = ratings.split(",");
+			console.log(Array.toString(split));
 			let pusher = {
 				user: split[0],
 				rate: split[1],
