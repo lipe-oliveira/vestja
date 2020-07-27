@@ -179,7 +179,7 @@ router.post('/post_restaurantes', async (req, res) => {
 			};
 			*/
 
-			await delete req.body.ratings;
+			//await delete req.body.ratings;
 			await Restaurante.create(req.body);
 			
 			let restaurante = await Restaurante.findOne({ id });
