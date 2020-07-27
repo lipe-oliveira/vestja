@@ -170,8 +170,8 @@ router.post('/post_restaurantes', async (req, res) => {
 		} else {
 			const { ratings, descript} = req.body;
 
-			req.body.ratings = "";
-			req.body.descript = "";
+			delete req.body.ratings;
+			delete req.body.descript;
 
 			console.log(req.body);
 
