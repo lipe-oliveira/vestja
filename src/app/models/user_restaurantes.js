@@ -12,8 +12,7 @@ const schema = new mongoose.Schema({
 	descript: [
 		{
 			desc: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'User',
+				type: String,
 				required: false
 			}
 		}
