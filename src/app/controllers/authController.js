@@ -148,10 +148,12 @@ router.post('/post_restaurantes', async (req, res) => {
 
 			let restaurante = await Restaurante.findOne({ id });
 
-			if(await Restaurante.findOne(descript)){
-				restaurante.deleteOne(descript);
+			if(restaurante.toString().includes(descript)){
+				restaurante.descript = "";
+				console.log("achou");
 			}
 
+			/*
 			let pusher = {
 				user: ratings[0],
 				rate: ratings[1],
@@ -159,28 +161,31 @@ router.post('/post_restaurantes', async (req, res) => {
 			};
 
 			console.log(restaurante);
-			console.log(pusher);
+			console.log(ratings);
 
 			await restaurante.ratings.push(pusher);
 			await restaurante.save();
+			*/
 
 			res.send(await Restaurante.findOne({ id }));
 		} else {
 			const { ratings} = req.body;
 
+			/*
 			let pusher = {
 				user: ratings[0],
 				rate: ratings[1],
 				description: ratings[2]
 			};
+			*/
 
 			await delete req.body.ratings;
 			await Restaurante.create(req.body);
-
+			
 			let restaurante = await Restaurante.findOne({ id });
 
-			await restaurante.ratings.push(pusher);
-			await restaurante.save();
+			//await restaurante.ratings.push(pusher);
+			//await restaurante.save();
 
 			res.send(await Restaurante.findOne({ id }).populate('ratings.user', ['name', 'email']));
 		}
