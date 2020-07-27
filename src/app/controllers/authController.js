@@ -164,7 +164,7 @@ router.post('/post_restaurantes', async (req, res) => {
 			}
 
 			let split = ratings.split(",");
-			console.log(Array.toString(split));
+			console.log(split + "!");
 			let pusher = {
 				user: split[0],
 				rate: split[1],
