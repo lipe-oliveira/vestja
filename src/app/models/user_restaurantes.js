@@ -9,10 +9,15 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	descript: {
-		type: String,
-		required: true
-	},
+	descript: [
+		{
+			desc: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'User',
+				required: false
+			}
+		}
+	],
 	id: {
 		type: String,
 		required: true
@@ -32,10 +37,10 @@ const schema = new mongoose.Schema({
 				required: false
 			},
 			rate: {
-				type: String
+				formType: String
 			},
 			description: {
-				type: String
+				formType: String
 			}
 		}
 	]
