@@ -173,6 +173,8 @@ router.post('/post_restaurantes', async (req, res) => {
 			req.body.ratings = "";
 			req.body.descript = "";
 
+			console.log(req.body);
+
 			await Restaurante.create(req.body);
 			
 			let restaurante = await Restaurante.findOne({ id });
