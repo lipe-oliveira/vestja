@@ -155,7 +155,7 @@ router.post('/post_restaurantes', async (req, res) => {
 				else{
 					if(descript != undefined){
 						let pusher = {
-							desc: descript
+							desc: descript.toString()
 						};
 			
 						await restaurante.descript.push(pusher);
@@ -169,14 +169,15 @@ router.post('/post_restaurantes', async (req, res) => {
 				console.log(err.toString());
 			}
 			
+			console.log(restaurante);
 			let split = ratings.split(",");
-			let pusher = {
+			let pusherr = {
 				user: split[0],
 				rate: split[1],
 				description: split[2]
 			};
 
-			await restaurante.ratings.push(pusher);
+			await restaurante.ratings.push(pusherr);
 			await restaurante.save();
 
 			let rest = await Restaurante.findOne({ id });
