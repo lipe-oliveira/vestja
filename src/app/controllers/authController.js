@@ -169,7 +169,6 @@ router.post('/post_restaurantes', async (req, res) => {
 				console.log("Corpo21: " + err.toString());
 			}
 			
-			console.log(restaurante);
 			let split = ratings.split(",");
 			let pusherr = {
 				user: split[0],
