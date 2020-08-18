@@ -148,9 +148,9 @@ router.post('/post_restaurantes', async (req, res) => {
 
 
 			if(restaurante.toString().includes(descript)){
+				console.log("HAVE " + restaurante.descript );
+
 				restaurante.descript = "";
-				console.log("HAVE " + restaurante.toJSON().descript );
-				console.log("HAVE " + restaurante.toJSON() );
 
 			}
 			else{
