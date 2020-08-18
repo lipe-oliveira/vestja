@@ -147,13 +147,7 @@ router.post('/post_restaurantes', async (req, res) => {
 			let restaurante = await Restaurante.findOne({ id });
 
 
-			if(restaurante.toString().includes(descript)){
-				console.log("HAVE " + restaurante.descript );
-
-				restaurante.descript = "";
-
-			}
-			else{
+			if(!restaurante.toString().includes(descript)){
 				if(descript != undefined){
 					let pusher = {
 						desc: descript.toString()
