@@ -146,7 +146,7 @@ router.post('/post_restaurantes', async (req, res) => {
 			const { ratings, descript } = req.body;
 			console.log("Corpo1: " + descript);
 
-			let restaurante = await Restaurante.findOne({ id });
+			const restaurante = await Restaurante.findOne({ id });
 
 			try{
 				if(restaurante.toString().includes(descript)){
