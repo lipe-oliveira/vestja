@@ -149,6 +149,8 @@ router.post('/post_restaurantes', async (req, res) => {
 			const restaurante = await Restaurante.findOne({ id });
 
 			try{
+				console.log("Corp101: ");
+
 				if(restaurante.toString().includes(descript)){
 					restaurante.descript = "";
 				}
