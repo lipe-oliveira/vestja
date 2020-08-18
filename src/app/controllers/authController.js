@@ -144,12 +144,14 @@ router.post('/post_restaurantes', async (req, res) => {
 		const { id } = req.body;
 		if (await Restaurante.findOne({ id })) {
 			const { ratings, descript } = req.body;
-			const restaurante = await Restaurante.findOne({ id });
+			let restaurante = await Restaurante.findOne({ id });
 
 
 			if(restaurante.toString().includes(descript)){
 				restaurante.descript = "";
-				console.log("HAVE " + restaurante.descript );
+				console.log("HAVE " + restaurante.toJSON().descript );
+				console.log("HAVE " + restaurante.toJSON() );
+
 			}
 			else{
 				if(descript != undefined){
