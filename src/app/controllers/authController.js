@@ -144,33 +144,24 @@ router.post('/post_restaurantes', async (req, res) => {
 		const { id } = req.body;
 		if (await Restaurante.findOne({ id })) {
 			const { ratings, descript } = req.body;
-			console.log("Corpo1: " + descript);
-
 			const restaurante = await Restaurante.findOne({ id });
 
-			try{
-				console.log("Corp101: ");
 
-				if(restaurante.toString().includes(descript)){
-					restaurante.descript = "";
-				}
-				else{
-					if(descript != undefined){
-						let pusher = {
-							desc: descript.toString()
-						};
-			
-						await restaurante.descript.push(pusher);
-						await restaurante.save();
-					}
-					
-				}
-	
+			if(restaurante.toString().includes(descript)){
+				restaurante.descript = "";
 			}
-			catch(err){
-				console.log("Corpo21: " + err.toString());
-			}
-			
+			else{
+				if(descript != undefined){
+					let pusher = {
+						desc: descript.toString()
+					};
+		
+					await restaurante.descript.push(pusher);
+					await restaurante.save();
+				}
+				
+			}	
+		
 			let split = ratings.split(",");
 			let pusherr = {
 				user: split[0],
