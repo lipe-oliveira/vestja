@@ -156,7 +156,8 @@ router.post('/post_restaurantes', async (req, res) => {
 					let pusher = {
 						desc: descript.toString()
 					};
-		
+					console.log(pusher);
+
 					await restaurante.descript.push(pusher);
 					await restaurante.save();
 				}
