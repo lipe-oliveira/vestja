@@ -149,7 +149,7 @@ router.post('/post_restaurantes', async (req, res) => {
 
 			if(restaurante.toString().includes(descript)){
 				restaurante.descript = "";
-				console.log("HAVE");
+				console.log("HAVE " + descript );
 			}
 			else{
 				if(descript != undefined){
