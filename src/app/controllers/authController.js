@@ -141,11 +141,10 @@ router.get('/get_restaurantes', async (req, res) => {
 
 router.post('/post_restaurantes', async (req, res) => {
 	try {
-		console.log("CORPO: " + req.body);
 		const { id } = req.body;
 		if (await Restaurante.findOne({ id })) {
 			const { ratings, descript } = req.body;
-			console.log(descript);
+			console.log("Corpo1: " + descript);
 
 			let restaurante = await Restaurante.findOne({ id });
 
@@ -167,7 +166,7 @@ router.post('/post_restaurantes', async (req, res) => {
 	
 			}
 			catch(err){
-				console.log(err.toString());
+				console.log("Corpo21: " + err.toString());
 			}
 			
 			console.log(restaurante);
@@ -190,7 +189,7 @@ router.post('/post_restaurantes', async (req, res) => {
 			delete req.body.ratings;
 			delete req.body.descript;
 
-			console.log(req.body);
+			console.log("Corpo2: " + req.body);
 
 			await Restaurante.create(req.body);
 			
@@ -208,7 +207,7 @@ router.post('/post_restaurantes', async (req, res) => {
 		}
 	} catch (err) {
 		res.status(404).send('Já existe esse restaurante!');
-		console.log(err);
+		console.log("Corpo3: " + err);
 	}
 });
 
