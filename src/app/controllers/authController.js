@@ -172,6 +172,7 @@ router.post('/post_restaurantes', async (req, res) => {
 			await restaurante.ratings.push(pusherr);
 			await restaurante.save();
 
+			console.log("OIOIOI");
 			let rest = await Restaurante.findOne({ id });
 			rest.fotos = "";
 			res.send(rest);
