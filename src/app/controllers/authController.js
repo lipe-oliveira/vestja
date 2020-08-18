@@ -169,7 +169,7 @@ router.post('/post_restaurantes', async (req, res) => {
 				description: split[2]
 			};
 
-			console.log("OIO");
+			console.log(pusherr);
 
 			await restaurante.ratings.push(pusherr);
 			await restaurante.save();
