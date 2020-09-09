@@ -16,3 +16,6 @@ git push
 
 npm i -g heroku
 heroku logs -t --app bibiboom-backend
+
+https://github.com/lipe-oliveira/vestja.git
+git remote set-url origin git@your.git.repo.example.com:user/repository2.git
